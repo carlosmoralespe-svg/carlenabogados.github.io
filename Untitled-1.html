@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARLEN | Abogados & Consultores</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --azul-corp: #0F2027;
+            --azul-claro: #203A43;
+            --morado-medico: #8E2DE2;
+            --negro-base: #050505;
+            --texto-claro: #F8F9FA;
+            --texto-gris: #A0AEC0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--negro-base); color: var(--texto-claro); overflow-x: hidden; line-height: 1.6; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+        /* Navegación */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 8%; position: fixed; width: 100%; top: 0; z-index: 1000; transition: 0.4s; }
+        nav.scrolled { background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(10px); padding: 1rem 8%; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .logo { font-size: 1.8rem; font-weight: 700; letter-spacing: 3px; color: #fff; text-decoration: none; }
+        .logo span { color: var(--morado-medico); }
+        .nav-links a { color: #fff; text-decoration: none; margin-left: 2rem; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a:hover { color: var(--morado-medico); }
+
+        /* Hero Section */
+        .hero { height: 100vh; display: flex; align-items: center; padding: 0 8%; background: linear-gradient(to right, rgba(5, 5, 5, 0.9), rgba(15, 32, 39, 0.6)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1920&q=80') center/cover; }
+        .hero-content { max-width: 850px; }
+        .hero h1 { font-size: 5rem; line-height: 1; margin-bottom: 2rem; }
+        .hero p { font-size: 1.2rem; color: var(--texto-gris); margin-bottom: 3rem; max-width: 600px; }
+
+        /* Misión y Visión */
+        .mision-vision { padding: 8rem 8%; background: var(--azul-corp); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .mv-card { background: rgba(255, 255, 255, 0.03); padding: 4rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s; }
+        .mv-card:hover { border-color: var(--morado-medico); background: rgba(255, 255, 255, 0.05); }
+        .mv-card i { font-size: 2rem; color: var(--morado-medico); margin-bottom: 1.5rem; }
+        .mv-card h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+
+        /* Servicios */
+        .servicios { padding: 8rem 8%; background: var(--negro-base); }
+        .section-tag { color: var(--morado-medico); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1rem; display: block; text-align: center; }
+        .section-title { font-size: 3.5rem; text-align: center; margin-bottom: 5rem; }
+        .grid-servicios { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .card { background: #111; border-radius: 15px; overflow: hidden; transition: 0.5s; border: 1px solid #222; }
+        .card:hover { transform: translateY(-15px); border-color: var(--morado-medico); }
+        .card-img { width: 100%; height: 250px; object-fit: cover; opacity: 0.7; transition: 0.5s; }
+        .card:hover .card-img { opacity: 1; transform: scale(1.05); }
+        .card-body { padding: 2rem; }
+
+        /* Equipo */
+        .equipo { padding: 8rem 8%; background: #080808; }
+        .grid-equipo { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem; justify-content: center; }
+        .abogado-card { text-align: center; }
+        .abogado-img-container { width: 300px; height: 400px; margin: 0 auto 2rem; border-radius: 20px; overflow: hidden; border: 2px solid var(--morado-medico); position: relative; }
+        .abogado-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.5s; }
+        .abogado-card:hover .abogado-img { filter: grayscale(0%); transform: scale(1.05); }
+        .abogado-info h3 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        .abogado-info p { color: var(--morado-medico); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+
+        /* Botón WhatsApp Flotante */
+        .btn-whatsapp { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: #fff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); z-index: 1000; text-decoration: none; transition: 0.3s; }
+        .btn-whatsapp:hover { transform: scale(1.1); background: #20ba5a; }
+
+        /* Footer & Social */
+        footer { padding: 6rem 8%; background: #050505; text-align: center; border-top: 1px solid #111; }
+        .social-links { margin: 2rem 0; display: flex; justify-content: center; gap: 2rem; }
+        .social-links a { color: #fff; font-size: 1.5rem; transition: 0.3s; }
+        .social-links a:hover { color: var(--morado-medico); transform: translateY(-5px); }
+        .btn-cta { background: var(--morado-medico); color: #fff; padding: 1.2rem 3rem; border-radius: 50px; text-decoration: none; font-weight: 600; display: inline-block; transition: 0.4s; border: 1px solid var(--morado-medico); }
+        .btn-cta:hover { background: transparent; transform: scale(1.05); }
+
+        /* Animaciones */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s all ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .mision-vision { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="#" class="logo">CARLEN<span>.</span></a>
+        <div class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#mision">Nuestra Esencia</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#equipo">Abogados</a>
+            <a href="#contacto" style="border: 1px solid var(--morado-medico); padding: 0.5rem 1.5rem; border-radius: 20px;">Contacto</a>
+        </div>
+    </nav>
+
+    <header class="hero" id="inicio">
+        <div class="hero-content">
+            <h1 class="reveal active">Liderazgo Legal de Alto Nivel.</h1>
+            <p class="reveal active">En CARLEN Abogados & Consultores, fusionamos el rigor jurídico tradicional con la innovación tecnológica para proteger lo que más importa.</p>
+            <a href="#contacto" class="btn-cta reveal active">Agendar Consultoría Privada</a>
+        </div>
+    </header>
+
+    <section class="mision-vision" id="mision">
+        <div class="mv-card reveal">
+            <i class="fas fa-fingerprint"></i>
+            <h2>Nuestra Misión</h2>
+            <p>Brindar soluciones jurídicas preventivas y estratégicas con el más alto rigor técnico, utilizando la innovación tecnológica para optimizar la seguridad jurídica de nuestros clientes en los sectores médico, comercial y civil. "Demostramos nuestro valor antes de vender".</p>
+        </div>
+        <div class="mv-card reveal">
+            <i class="fas fa-eye"></i>
+            <h2>Nuestra Visión</h2>
+            <p>Consolidarnos para el 2027 como la firma boutique líder en LegalTech a nivel nacional, siendo referentes de autoridad por nuestra capacidad de blindaje patrimonial y defensa especializada para el sector corporativo y de la salud.</p>
+        </div>
+    </section>
+
+    <section class="servicios" id="servicios">
+        <span class="section-tag reveal">Excelencia Especializada</span>
+        <h2 class="section-title reveal">Áreas de Práctica</h2>
+        <div class="grid-servicios">
+            <div class="card reveal">
+                <img src="./Derecho Comercial.jpg" class="card-img" alt="Derecho Comercial" onerror="this.src='https://images.unsplash.com/photo-1454165833767-027eeea15c3e?auto=format&fit=crop&w=800&q=80'">
+                <div class="card-body">
+                    <h3>Derecho Comercial</h3>
+                    <p>Blindaje de contratos, gestión de riesgos corporativos y asesoría estratégica para PyMEs en expansión.</p>
+                </div>
+            </div>
+            <div class="card reveal">
+                <img src="./Derecho Medico.webp" class="card-img" alt="Derecho Médico" onerror="this.src='https://images.unsplash.com/photo-1584432810601-6a7f27a2362b?auto=format&fit=crop&w=800&q=80'">
+                <div class="card-body">
+                    <h3>Derecho Médico</h3>
+                    <p>Defensa integral para profesionales de la salud y clínicas ante responsabilidades médico-legales.</p>
+                </div>
+            </div>
+            <div class="card reveal">
+                <img src="./Derecho civil.jpg" class="card-img" alt="Derecho Civil" onerror="this.src='https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=800&q=80'">
+                <div class="card-body">
+                    <h3>Derecho Civil</h3>
+                    <p>Resolución de conflictos patrimoniales y gestión de obligaciones civiles con precisión institucional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="equipo" id="equipo">
+        <span class="section-tag reveal">Nuestros Especialistas</span>
+        <h2 class="section-title reveal">El Rostro de la Confianza</h2>
+        <div class="grid-equipo">
+            <div class="abogado-card reveal">
+                <div class="abogado-img-container">
+                    <img src="./CARLOS.jpeg" alt="Carlos Abogado" class="abogado-img" onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80'">
+                </div>
+                <div class="abogado-info">
+                    <h3>Carlos</h3>
+                    <p>Especialista en Derecho Médico y Derecho Civil</p>
+                </div>
+            </div>
+            <div class="abogado-card reveal">
+                <div class="abogado-img-container">
+                    <img src="./HELLEN.jpeg" alt="Hellen Abogada" class="abogado-img" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80'">
+                </div>
+                <div class="abogado-info">
+                    <h3>Hellen</h3>
+                    <p>Especialista en Derecho Médico y Comercial</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <h2 class="reveal">¿Listo para blindar su futuro?</h2>
+        <p class="reveal" style="color: var(--texto-gris); margin-bottom: 2rem;">Contáctenos a través de nuestros canales oficiales.</p>
+        
+        <div class="social-links reveal">
+            <a href="https://www.instagram.com/carlen_abogados" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@carlen_abogados" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="mailto:contacto@carlen.com" title="Correo"><i class="fas fa-envelope"></i></a>
+        </div>
+        
+        <p class="reveal" style="font-size: 0.8rem; color: #444; margin-top: 3rem;">&copy; 2026 CARLEN Abogados & Consultores. Todos los derechos reservados.</p>
+    </footer>
+
+    <a href="https://wa.me/573000000000?text=Hola,%20me%20gustaría%20agendar%20una%20asesoría%20con%20CARLEN%20Abogados." class="btn-whatsapp" target="_blank" title="Escríbenos por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // Scroll reveal animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+</body>
+</html>
